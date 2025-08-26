@@ -1,0 +1,45 @@
+<h2 class="mb-4">Cadastro de Restaurantes</h2>
+
+<div class="card shadow p-4">
+  <form ng-submit="cadastrar()" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" ng-model="novoRestaurante.nome" placeholder="Nome do restaurante">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Endereço</label>
+        <input type="text" class="form-control" ng-model="novoRestaurante.endereco" placeholder="Endereço">
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">CNPJ</label>
+        <input type="text" class="form-control" ng-model="novoRestaurante.cnpj" placeholder="CNPJ">
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </div>
+  </form>
+</div>
+
+<div class="mt-4">
+    <h3>Lista de Restaurantes</h3>
+    <table class="table table-bordered table-hover mt-2">
+        <thead class="table-light">
+            <tr>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>CNPJ</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="restaurante in restaurantes">
+                <td>{{ restaurante.nome }}</td>
+                <td>{{ restaurante.endereco }}</td>
+                <td>{{ restaurante.cnpj }}</td>
+                <td><button class="btn btn-danger btn-sm" ng-click="excluir($index)">Excluir</button></td>
+            </tr>
+        </tbody>
+  </table>
+</div>
