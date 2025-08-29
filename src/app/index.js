@@ -1,1 +1,1 @@
-angular.module("sistemaDelivery", ["ngRoute"]);
+angular.module("sistemaDelivery", ["ngRoute","ui.mask"]);

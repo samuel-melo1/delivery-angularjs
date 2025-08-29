@@ -2,7 +2,7 @@ angular.module("sistemaDelivery")
 .config(function($routeProvider) {
   $routeProvider
     .when("/restaurantes", {
-      templateUrl: "/src/app/features/restaurantes/restaurante.html",
+      templateUrl: "/src/app/features/restaurantes/views/restaurante.html",
       controller: "RestaurantesController"
     })
     .when("/produtos", {
