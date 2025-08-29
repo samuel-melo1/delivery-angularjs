@@ -1,0 +1,48 @@
+body { 
+    overflow-x: hidden; 
+}
+
+#sidebar { 
+    min-height: 100vh; 
+    background-color: #343a40; 
+    color: #fff; 
+    width: 250px; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    padding: 20px; 
+}
+#sidebar .nav-link { 
+    color: #fff; 
+}
+#sidebar .nav-link .fa-solid { 
+    color: #adb5bd; 
+}
+
+#sidebar .nav-link.active, #sidebar .nav-link:hover { 
+    color: #fff; 
+    background-color: #495057; 
+}
+
+#header { 
+    position: fixed; 
+    top: 0; 
+    left: 250px; 
+    right: 0; 
+    height: 60px; 
+    background: #f8f9fa; 
+    border-bottom: 1px solid #dee2e6; 
+    padding: 10px 20px;  
+    z-index: 1000; 
+}
+
+#content { 
+    margin-left: 250px; 
+    margin-top: 60px; 
+    padding: 20px; 
+}
+
+#toggleSidebar {
+    position: relative;
+    top: -25px;   
+}
