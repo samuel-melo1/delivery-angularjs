@@ -46,3 +46,9 @@ body {
     position: relative;
     top: -25px;   
 }
+
+.tabela-compacta td, 
+.tabela-compacta th {
+    padding: 0.4rem !important;
+
+}
