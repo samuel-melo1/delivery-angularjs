@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="sistemaDelivery">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste Toastr</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.1.1/angular-toastr.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.1.1/angular-toastr.tpls.min.js"></script>
+</head>
+<body ng-controller="TesteController">
+
+  <button ng-click="mostrarSucesso()">Mostrar Sucesso</button>
+  <button ng-click="mostrarErro()">Mostrar Erro</button>
+
+  <script>
+    angular.module('sistemaDelivery', ['ngAnimate', 'toastr'])
+      .controller('TesteController', function($scope, toastr) {
+        $scope.mostrarSucesso = function() {
+          toastr.success("Funciona perfeitamente!", "Sucesso");
+        };
+        $scope.mostrarErro = function() {
+          toastr.error("Algo deu errado!", "Erro");
+        };
+      });
+  </script>
+
+</body>
+</html>
