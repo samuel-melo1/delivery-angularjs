@@ -1,11 +1,9 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h5 class="mb-0">Restaurantes</h5>
+  <h5 class="mb-0">Restaurantes</h5> 
   <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRestaurante">
     <i class="fa-solid fa-plus me-1"></i> Novo
   </button>
 </div>
-
-
 <div class="table-responsive shadow rounded mb-4">
   <table class="table table-hover table-sm align-middle tabela-compacta mb-0">
     <thead style="background-color: #495057; color: #fff;">
@@ -36,7 +34,7 @@
   </table>
 </div>
 
-<!-- Paginação -->
+
 <nav aria-label="Navegação de páginas" class="d-flex justify-content-end">
   <ul class="pagination pagination-sm mb-0">
     <li class="page-item disabled">
@@ -49,35 +47,34 @@
   </ul>
 </nav>
 
-
-<!-- Modal -->
 <div class="modal fade" id="modalRestaurante" tabindex="-1" aria-labelledby="modalRestaurante" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalRestauranteTitle">Novo Restaurante</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="nomeRestaurante" class="form-label">Nome</label>
-            <input type="text" class="form-control" ng-model="novoRestaurante.nome" placeholder="Digite o nome">
-          </div>
-          <div class="mb-3">
-            <label for="enderecoRestaurante" class="form-label">Endereço</label>
-            <input type="text" class="form-control" ng-model="novoRestaurante.endereco" placeholder="Digite o endereço">
-          </div>
-          <div class="mb-3">
-            <label for="cnpjRestaurante" class="form-label">CNPJ</label>
-            <input type="text" class="form-control" ng-model="novoRestaurante.cnpj" ui-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-success" ng-click="cadastrar()">Salvar</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalRestauranteTitle">Novo Restaurante</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="nomeRestaurante" class="form-label">Nome</label>
+                        <input type="text" class="form-control" ng-model="novoRestaurante.nome" placeholder="Digite o nome">
+                    </div>
+                    <div class="mb-3">
+                        <label for="enderecoRestaurante" class="form-label">Endereço</label>
+                        <input type="text" class="form-control" ng-model="novoRestaurante.endereco" placeholder="Digite o endereço">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cnpjRestaurante" class="form-label">CNPJ</label>
+                        <input type="text" class="form-control" ng-model="novoRestaurante.cnpj" ui-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" ng-click="cadastrar()">Salvar</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+

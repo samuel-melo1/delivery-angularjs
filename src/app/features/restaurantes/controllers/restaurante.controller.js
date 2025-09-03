@@ -1,7 +1,10 @@
 angular.module("sistemaDelivery")
-.controller('RestaurantesController', function (RestauranteService, $scope) {
+.controller('RestaurantesController',function (RestauranteService, $scope, $route, $window) {
+
   $scope.restaurantes = [];
   $scope.novoRestaurante = {};
+
+  var modal = new bootstrap.Modal(document.getElementById('modalRestaurante'));
 
   function carregarRestaurantes() {
     RestauranteService.listar().then(function(response) {
@@ -13,14 +16,36 @@ angular.module("sistemaDelivery")
   }
 
   $scope.cadastrar = function() {
-    if ($scope.novoRestaurante.nome) {
-      RestauranteService.cadastrar($scope.novoRestaurante)
-        .then(function(response) {
-          $scope.restaurantes.push(response.data); // adiciona o que voltou da API
-          $scope.novoRestaurante = {};
-        });
+    if (!$scope.novoRestaurante.nome) {
+      Swal.fire({
+          title: "É necessário informar o nome do restaurante",
+          icon: "warning",
+          draggable: true
+        })
+        return 
     }
-  };
 
+    RestauranteService.cadastrar($scope.novoRestaurante)
+      .then(function(response) {
+        $scope.restaurantes.push(response.data);
+        $scope.novoRestaurante = {};
+        modal.hide()
+
+        Swal.fire({
+          title: "Restaurante cadastrado com sucesso",
+          icon: "success",
+          draggable: true
+        })
+        $route.reload();
+      })
+      .catch(function(error){
+        let msg = (error.data && error.data.errors) ? error.data.errors[0] : "Erro inesperado!";
+        Swal.fire({
+          title: msg,
+          icon: "error",
+          draggable: true
+        })
+      });
+  }
   carregarRestaurantes();
 });
