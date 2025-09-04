@@ -1,4 +1,5 @@
-app.service("AlertService", function() {
+angular.module("sistemaDelivery")
+.service("AlertService", function() {
 
     this.show = function(title, icon = "info", options = {}) {
         return Swal.fire({

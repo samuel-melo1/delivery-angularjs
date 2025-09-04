@@ -1,5 +1,5 @@
 angular.module("sistemaDelivery")
-.controller('RestaurantesController',function (RestauranteService, $scope, $route, $window) {
+.controller('RestaurantesController',function (RestauranteService, $scope, $route, AlertService) {
 
   $scope.restaurantes = [];
   $scope.novoRestaurante = {};
@@ -32,5 +32,27 @@ angular.module("sistemaDelivery")
         AlertService.error(msg);
     }
   }
+
+    $scope.inativar = async function(restauranteId){
+        return Swal.fire({
+                title: "Você tem certeza que deseja inativar o restaurante?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try{
+                        await RestauranteService.inativar(restauranteId);
+                        await AlertService.success("Restaurante inativado com sucesso");
+                        $route.reload();
+                    }catch(error){
+                        const msg = error?.data?.errors?.[0] || "Erro inesperado!";
+                        AlertService.error(msg);
+                    }
+                }
+            })
+    }
   carregarRestaurantes();
 });

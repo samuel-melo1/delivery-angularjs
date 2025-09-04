@@ -7,9 +7,11 @@ angular.module("sistemaDelivery")
         listar: function() {
             return $http.get(baseUrl)
         },
-
         cadastrar: function(restaurante) {
             return $http.post(baseUrl, restaurante);
+        },
+        inativar: function(restauranteId){
+            return $http.put(baseUrl + "/inativar/" + restauranteId)
         }
     };
 })

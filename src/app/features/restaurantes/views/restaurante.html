@@ -1,4 +1,17 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="dropdown mb-3">
+  <button class="btn btn-outline-secondary btn-sm d-flex align-items-center bg-white" 
+          type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-filter me-2 text-secondary"></i>
+    <span class="text-secondary">Filtro</span>
+  </button>
+  <ul class="dropdown-menu shadow-sm">
+    <li><a class="dropdown-item active" href="#">Todos</a></li>
+    <li><a class="dropdown-item" href="#">Ativos</a></li>
+    <li><a class="dropdown-item" href="#">Inativos</a></li>
+  </ul>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3 mt-3">
   <h5 class="mb-0">Restaurantes</h5> 
   <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRestaurante">
     <i class="fa-solid fa-plus me-1"></i> Novo
@@ -25,7 +38,7 @@
           <button class="btn btn-sm btn-outline-secondary me-1" ng-click="editar(restaurante)" title="Editar">
             <i class="fa-solid fa-pen-to-square"></i>
           </button>
-          <button class="btn btn-sm btn-outline-danger" ng-click="excluir(restaurante)" title="Excluir">
+          <button class="btn btn-sm btn-outline-danger" ng-click="inativar(restaurante.id)" title="Inativar">
             <i class="fa-solid fa-trash"></i>
           </button>
         </td>
@@ -33,7 +46,6 @@
     </tbody>
   </table>
 </div>
-
 
 <nav aria-label="Navegação de páginas" class="d-flex justify-content-end">
   <ul class="pagination pagination-sm mb-0">
