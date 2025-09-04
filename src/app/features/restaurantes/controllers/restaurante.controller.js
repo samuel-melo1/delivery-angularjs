@@ -15,37 +15,22 @@ angular.module("sistemaDelivery")
     });
   }
 
-  $scope.cadastrar = function() {
+  $scope.cadastrar = async function() {
     if (!$scope.novoRestaurante.nome) {
-      Swal.fire({
-          title: "É necessário informar o nome do restaurante",
-          icon: "warning",
-          draggable: true
-        })
-        return 
+        return AlertService.warning("É necessário informar o nome do restaurante"); 
     }
 
-    RestauranteService.cadastrar($scope.novoRestaurante)
-      .then(function(response) {
+    try {
+        const response = await RestauranteService.cadastrar($scope.novoRestaurante);
         $scope.restaurantes.push(response.data);
         $scope.novoRestaurante = {};
-        modal.hide()
-
-        Swal.fire({
-          title: "Restaurante cadastrado com sucesso",
-          icon: "success",
-          draggable: true
-        })
+        await AlertService.success("Restaurante cadastrado com sucesso");
+        modal.hide();
         $route.reload();
-      })
-      .catch(function(error){
-        let msg = (error.data && error.data.errors) ? error.data.errors[0] : "Erro inesperado!";
-        Swal.fire({
-          title: msg,
-          icon: "error",
-          draggable: true
-        })
-      });
+    } catch (error) {
+        const msg = error?.data?.errors?.[0] || "Erro inesperado!";
+        AlertService.error(msg);
+    }
   }
   carregarRestaurantes();
 });
