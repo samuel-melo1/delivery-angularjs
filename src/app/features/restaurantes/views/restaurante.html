@@ -2,12 +2,12 @@
   <button class="btn btn-outline-secondary btn-sm d-flex align-items-center bg-white" 
           type="button" data-bs-toggle="dropdown" aria-expanded="false">
     <i class="fa-solid fa-filter me-2 text-secondary"></i>
-    <span class="text-secondary">Filtro</span>
+    <span class="text-secondary" id="dropdown-label">Filtro: Todos</span>
   </button>
   <ul class="dropdown-menu shadow-sm">
-    <li><a class="dropdown-item active" href="#">Todos</a></li>
-    <li><a class="dropdown-item" href="#">Ativos</a></li>
-    <li><a class="dropdown-item" href="#">Inativos</a></li>
+    <li><a class="dropdown-item active" data-status="TODOS">Todos</a></li>
+    <li><a class="dropdown-item"  data-status="ATIVO">Ativos</a></li>
+    <li><a class="dropdown-item"  data-status="INATIVO">Inativos</a></li>
   </ul>
 </div>
 
@@ -25,6 +25,7 @@
         <th scope="col"><i class="fa-solid fa-utensils me-1 text-light"></i> Nome</th>
         <th scope="col"><i class="fa-solid fa-map-location-dot me-1 text-light"></i> Endereço</th>
         <th scope="col"><i class="fa-solid fa-building me-1 text-light"></i> CNPJ</th>
+         <th scope="col"><i class="fa-solid fa-building me-1 text-light"></i> Status</th>
         <th scope="col" style="width: 120px;"><i class="fa-solid fa-gear me-1 text-light"></i> Ações</th>
       </tr>
     </thead>
@@ -34,12 +35,17 @@
         <td>{{ restaurante.nome }}</td>
         <td>{{ restaurante.endereco }}</td>
         <td>{{ restaurante.cnpjFormatado }}</td>
+        <td>{{ restaurante.status }}</td>
         <td>
           <button class="btn btn-sm btn-outline-secondary me-1" ng-click="editar(restaurante)" title="Editar">
             <i class="fa-solid fa-pen-to-square"></i>
           </button>
           <button class="btn btn-sm btn-outline-danger" ng-click="inativar(restaurante.id)" title="Inativar">
             <i class="fa-solid fa-trash"></i>
+          </button>
+
+          <button class="btn btn-sm btn-outline-danger" ng-click="ativar(restaurante.id)" title="Ativar">
+            <i class="fa-solid fa-unlock text-success"></i>
           </button>
         </td>
       </tr>
