@@ -8,16 +8,16 @@ angular.module("sistemaDelivery")
             return $http.get(baseUrl + "/restaurantes?status=" + status + '&page=' + page + '&size=' + size)
         },
         cadastrar: function(restaurante) {
-            return $http.post(baseUrl, restaurante);
+            return $http.post(baseUrl + "/restaurantes", restaurante);
         },
         inativar: function(restauranteId){
-            return $http.put(baseUrl + "/inativar/" + restauranteId)
+            return $http.put(baseUrl + "/restaurantes" + "/inativar/" + restauranteId)
         },
         ativar: function(restauranteId){
-            return $http.put(baseUrl + "/ativar/" + restauranteId)
+            return $http.put(baseUrl + "/restaurantes" + "/ativar/" + restauranteId)
         },
         editar: function(restauranteId, restaurante){
-            return $http.put(baseUrl + "/atualizar/" + restauranteId, restaurante)
+            return $http.put(baseUrl + "/restaurantes" + "/atualizar/" + restauranteId, restaurante)
         }
     };
 })

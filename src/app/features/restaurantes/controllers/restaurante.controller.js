@@ -84,7 +84,8 @@ angular.module("sistemaDelivery")
         modal.hide();
         $route.reload();
     } catch (error) {
-        const msg = error?.data?.errors?.[0] || "Erro inesperado!";
+        console.log(error)
+        const msg = error?.data?.errors?.[0] || error?.data?.message || "Erro inesperado!";
         AlertService.error(msg);
     }
   }
@@ -104,7 +105,7 @@ angular.module("sistemaDelivery")
                         await AlertService.success("Restaurante inativado com sucesso");
                         $route.reload();
                     }catch(error){
-                        const msg = error?.data?.errors?.[0] || "Erro inesperado!";
+                        const msg = error?.data?.errors?.[0] || error?.data?.message || "Erro inesperado: " + error;
                         AlertService.error(msg);
                     }
                 }
@@ -126,7 +127,7 @@ angular.module("sistemaDelivery")
                         await AlertService.success("Restaurante ativado com sucesso");
                         $route.reload();
                     }catch(error){
-                        const msg = error?.data?.errors?.[0] || "Erro inesperado!";
+                        const msg = error?.data?.errors?.[0] || error?.data?.message || "Erro inesperado: " + error;
                         AlertService.error(msg);
                     }
                 }
@@ -154,7 +155,7 @@ angular.module("sistemaDelivery")
                          modalEditar.hide();
                         $route.reload();
                     }catch(error){
-                        const msg = error?.data?.errors?.[0] || "Erro inesperado: " + error;
+                        const msg = error?.data?.errors?.[0] || error?.data?.message || "Erro inesperado: " + error;
                         AlertService.error(msg);
                     }
                 }
