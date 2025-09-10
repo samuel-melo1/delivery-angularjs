@@ -1,23 +1,75 @@
 angular.module("sistemaDelivery")
 .controller('RestaurantesController',function (RestauranteService, $scope, $route, AlertService) {
 
-  $scope.restaurantes = [];
-  $scope.novoRestaurante = {};
+   $scope.restaurantes = [];
+   $scope.novoRestaurante = {};
 
-  var modal = new bootstrap.Modal(document.getElementById('modalRestaurante'));
-  var modalEditar = new bootstrap.Modal(document.getElementById('modalAtualizarRestaurante'));
+   var modal = new bootstrap.Modal(document.getElementById('modalRestaurante'));
+   var modalEditar = new bootstrap.Modal(document.getElementById('modalAtualizarRestaurante'));
 
-  $scope.carregarRestaurantes = function(status) {
-      status = status || $scope.statusFiltro; 
-      RestauranteService.listar(status).then(function(response) {
-        console.log(response)
-          $scope.restaurantes = response.data.map(function(r) {
-              r.cnpjFormatado = r.cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
-              return r;
-          });
+    $scope.pageSizeOptions = [5, 10, 20, 50];
+    $scope.paginacao = {
+        content: [],           
+        totalPages: 0,
+        totalElements: 0,
+        number: 0,             
+        size: $scope.pageSizeOptions[0],
+        first: true,
+        last: true
+    };
+    $scope.paginasVisiveis = [];
+
+    $scope.mudarTamanhoPagina = function() {
+        $scope.carregarRestaurantes(); 
+    };
+
+    
+    function gerarPaginasVisiveis(paginaAtual, totalPaginas) {
+        const paginas = [];
+        const range = 0; 
+        paginas.push(1);
+
+        if (paginaAtual > range + 1) {
+            paginas.push('...');
+        }
+        for (let i = Math.max(2, paginaAtual - range + 1); i <= Math.min(totalPaginas - 1, paginaAtual + range + 1); i++) {
+            paginas.push(i);
+        }
+        if (paginaAtual < totalPaginas - range - 1) {
+            paginas.push('...');
+        }
+        if (totalPaginas > 1) {
+            paginas.push(totalPaginas);
+        }
+        return [...new Set(paginas)];
+    }
+
+
+  $scope.carregarRestaurantes = function(page=0) {
+    page = page || 0;
+    const status = $scope.statusFiltro || 'TODOS'; 
+
+    RestauranteService.listar(status, page, $scope.paginacao.size).then(function(response) {
+      $scope.paginacao = response.data;
+      
+      $scope.paginacao.content = response.data.content.map(function(r) {
+          r.cnpjFormatado = r.cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+          return r;
       });
+
+      $scope.restaurantes = $scope.paginacao.content;
+      $scope.paginasVisiveis = gerarPaginasVisiveis($scope.paginacao.number, $scope.paginacao.totalPages);
+    });
   };
+
   $scope.carregarRestaurantes();
+    $scope.irParaPagina = function(page) {
+      const paginaApi = page - 1;
+
+      if (paginaApi >= 0 && paginaApi < $scope.paginacao.totalPages) {
+          $scope.carregarRestaurantes(paginaApi);
+      }
+  };
 
   $scope.cadastrar = async function() {
     if (!$scope.novoRestaurante.nome) {

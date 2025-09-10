@@ -49,15 +49,36 @@
   </table>
 </div>
 
-<nav aria-label="Navegação de páginas" class="d-flex justify-content-end">
-  <ul class="pagination pagination-sm mb-0">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Anterior</a>
-    </li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
+<nav aria-label="Navegação de páginas" class="d-flex justify-content-end" >
+  <div class="d-flex align-items-center me-auto">
+    <label for="pageSizeSelect" class="form-label me-2 mb-0">Itens:</label>
+    <select class="form-select form-select-sm" 
+            id="pageSizeSelect"
+            ng-model="paginacao.size"
+            ng-options="size for size in pageSizeOptions"
+            ng-change="mudarTamanhoPagina()">
+    </select>
+  </div>
+
+  <ul class="pagination pagination-sm mb-0" ng-if="paginacao.totalPages > 1">
+      <li class="page-item" ng-class="{ 'disabled': paginacao.first }">
+          <a class="page-link" href="" ng-click="irParaPagina(paginacao.number)">Anterior</a>
+      </li>
+      <li class="page-item" 
+          ng-repeat="pagina in paginasVisiveis track by $index"
+          ng-class="{ 
+              'active': pagina === paginacao.number + 1,
+              'disabled': pagina === '...' }">
+          <a class="page-link" href="" 
+              ng-if="pagina !== '...'" 
+              ng-click="irParaPagina(pagina)">
+              {{ pagina }}
+          </a>
+          <span class="page-link" ng-if="pagina === '...'">...</span>
+      </li>
+      <li class="page-item" ng-class="{ 'disabled': paginacao.last }">
+          <a class="page-link" href="" ng-click="irParaPagina(paginacao.number + 2)">Próximo</a>
+      </li>
   </ul>
 </nav>
 
