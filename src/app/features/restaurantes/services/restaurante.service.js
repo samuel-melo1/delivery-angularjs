@@ -15,6 +15,9 @@ angular.module("sistemaDelivery")
         },
         ativar: function(restauranteId){
             return $http.put(baseUrl + "/ativar/" + restauranteId)
+        },
+        editar: function(restauranteId, restaurante){
+            return $http.put(baseUrl + "/atualizar/" + restauranteId, restaurante)
         }
     };
 })

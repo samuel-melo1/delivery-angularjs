@@ -5,6 +5,7 @@ angular.module("sistemaDelivery")
   $scope.novoRestaurante = {};
 
   var modal = new bootstrap.Modal(document.getElementById('modalRestaurante'));
+  var modalEditar = new bootstrap.Modal(document.getElementById('modalAtualizarRestaurante'));
 
   $scope.carregarRestaurantes = function(status) {
       status = status || $scope.statusFiltro; 
@@ -74,6 +75,34 @@ angular.module("sistemaDelivery")
                         $route.reload();
                     }catch(error){
                         const msg = error?.data?.errors?.[0] || "Erro inesperado!";
+                        AlertService.error(msg);
+                    }
+                }
+            })
+    }
+
+    $scope.montaDadosEdicao = async function(restauranteId){
+        var restaurante = $scope.restaurantes.find(r => r.id === restauranteId);
+        $scope.restauranteEdicao = angular.copy(restaurante);
+    }
+
+    $scope.editar = async function(){
+        return Swal.fire({
+                title: "Você tem certeza que deseja editar o restaurante?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try{
+                        await RestauranteService.editar($scope.restauranteEdicao.id, $scope.restauranteEdicao)
+                        await AlertService.success("Restaurante editado com sucesso");
+                         modalEditar.hide();
+                        $route.reload();
+                    }catch(error){
+                        const msg = error?.data?.errors?.[0] || "Erro inesperado: " + error;
                         AlertService.error(msg);
                     }
                 }

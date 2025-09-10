@@ -22,10 +22,10 @@
     <thead style="background-color: #495057; color: #fff;">
       <tr>
         <th scope="col" style="width: 60px;">#</th>
-        <th scope="col"><i class="fa-solid fa-utensils me-1 text-light"></i> Nome</th>
+        <th scope="col" ><i class="fa-solid fa-utensils me-1 text-light"></i> Nome</th>
         <th scope="col"><i class="fa-solid fa-map-location-dot me-1 text-light"></i> Endereço</th>
         <th scope="col"><i class="fa-solid fa-building me-1 text-light"></i> CNPJ</th>
-         <th scope="col"><i class="fa-solid fa-building me-1 text-light"></i> Status</th>
+        <th scope="col"><i class="fa-solid fa-building me-1 text-light"></i> Status</th>
         <th scope="col" style="width: 120px;"><i class="fa-solid fa-gear me-1 text-light"></i> Ações</th>
       </tr>
     </thead>
@@ -37,7 +37,7 @@
         <td>{{ restaurante.cnpjFormatado }}</td>
         <td>{{ restaurante.status }}</td>
         <td>
-          <button class="btn btn-sm btn-outline-secondary me-1" ng-click="editar(restaurante)" title="Editar">
+          <button class="btn btn-sm btn-outline-secondary me-1" data-bs-toggle="modal" data-bs-target="#modalAtualizarRestaurante" ng-click="montaDadosEdicao(restaurante.id)" title="Editar">
             <i class="fa-solid fa-pen-to-square"></i>
           </button>
           <button class="btn btn-sm btn-outline-danger" ng-click="inativar(restaurante.id)" title="Inativar">
@@ -87,6 +87,37 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
                 <button type="button" class="btn btn-success" ng-click="cadastrar()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAtualizarRestaurante" tabindex="-1" aria-labelledby="modalAtualizarRestaurante" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAtualizarRestauranteTitle">Atualizar Restaurante</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="nomeRestaurante" class="form-label">Nome</label>
+                        <input type="text" class="form-control" ng-model="restauranteEdicao.nome" placeholder="Digite o nome">
+                    </div>
+                    <div class="mb-3">
+                        <label for="enderecoRestaurante" class="form-label">Endereço</label>
+                        <input type="text" class="form-control" ng-model="restauranteEdicao.endereco" placeholder="Digite o endereço">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cnpjRestaurante" class="form-label">CNPJ</label>
+                        <input type="text" class="form-control" ng-model="restauranteEdicao.cnpj" ui-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" ng-click="editar()">Salvar</button>
             </div>
         </div>
     </div>
